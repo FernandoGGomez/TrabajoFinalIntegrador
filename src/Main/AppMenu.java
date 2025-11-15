@@ -128,12 +128,8 @@ public class AppMenu {
             case 2 -> menuHandler.listarProductos();
             case 3 -> menuHandler.actualizarProducto();
             case 4 -> menuHandler.eliminarProducto();
-            case 5 -> menuHandler.crearDomicilioIndependiente();
-            case 6 -> menuHandler.listarDomicilios();
-            case 7 -> menuHandler.actualizarDomicilioPorId();
-            case 8 -> menuHandler.eliminarDomicilioPorId();
-            case 9 -> menuHandler.actualizarDomicilioPorPersona();
-            case 10 -> menuHandler.eliminarDomicilioPorPersona();
+            case 5 -> menuHandler.buscarPorNombre();
+       
             case 0 -> {
                 System.out.println("Saliendo...");
                 running = false;
