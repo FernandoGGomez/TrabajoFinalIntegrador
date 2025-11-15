@@ -6,7 +6,7 @@ package Main;
 
 /**
  *
- * @author Admin
+ * @author notvo
  */
 public class TestConexion {
     

@@ -4,7 +4,7 @@
  */
 package Service;
 
-import DAO.ProductoDAO;
+import DAO.ProductoDao;
 import Models.Producto;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,11 +15,11 @@ import java.util.List;
  */
 public class ProductoServiceImp implements GenericService<Producto> {
 
-    private final ProductoDAO productoDAO; // mediante inyeccion 
+    private final ProductoDao productoDAO; // mediante inyeccion 
 
     private final CodigoBarrasServiceImp codigoBarrasSeriviceImp;
 
-    public ProductoServiceImp(ProductoDAO productoDAO, CodigoBarrasServiceImp codigoBarrasSeriviceImp) {
+    public ProductoServiceImp(ProductoDao productoDAO, CodigoBarrasServiceImp codigoBarrasSeriviceImp) {
         if (productoDAO == null) {
             throw new IllegalArgumentException("ProductoDao no puede ser null");
         }
@@ -31,6 +31,10 @@ public class ProductoServiceImp implements GenericService<Producto> {
         this.codigoBarrasSeriviceImp = codigoBarrasSeriviceImp;
     }
 
+    public CodigoBarrasServiceImp getCodigoBarras(){
+        return this.codigoBarrasSeriviceImp;
+    }
+    
     @Override
     public void insertar(Producto producto) throws SQLException, IllegalArgumentException {
         validateProducto(producto);
@@ -62,5 +66,12 @@ public class ProductoServiceImp implements GenericService<Producto> {
     private void validateProducto(Producto producto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public List<Producto> buscarPorNombreOMarca(String nombreOMarca) throws SQLException{
+        throw new UnsupportedOperationException("Not supported yet.") ;
+    }
 
+    public Producto buscarPorCodigoBarras(String cb) throws SQLException{
+           throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

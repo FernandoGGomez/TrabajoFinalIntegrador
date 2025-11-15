@@ -23,10 +23,5 @@ public class Categoria {
         return descripcion;
     }
     
-   /*    public Categoria getCategoriaPorId(int idCategoria){
-            como traigo la categoria de la DB?
-            Categoria categoriaEncontrada = 
-            return categoriaEncontrada;
-    }*/
     
 }

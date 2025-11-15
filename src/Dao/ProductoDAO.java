@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package DAO;
 
 import Config.DatabaseConnection;
@@ -7,8 +11,11 @@ import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
 
-
-public class ProductoDAO implements GenericDAO<Producto> {
+/**
+ *
+ * @author notvo
+ */
+public class ProductoDao implements GenericDao<Producto> {
 
     //PreparedStatement
     private static final String INSERT_SQL = "INSERT INTO productos (nombre_producto, marca_id, categoria_id, precio, peso, codigo_id) VALUES (?, ?, ?, ?, ?, ?)";
@@ -47,7 +54,7 @@ private static final String SEARCH_BY_NAME_SQL =
 //        this.codigoBarrasDao = codigoBarrasDao;
 //    }
 
-    public ProductoDAO() {
+    public ProductoDao() {
     }
 
     
@@ -126,7 +133,7 @@ private static final String SEARCH_BY_NAME_SQL =
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                throw new SQLException("No se encontrï¿½ el producto con ID: " + id);
+                throw new SQLException("No se encontró el producto con ID: " + id);
             }
         }
     }

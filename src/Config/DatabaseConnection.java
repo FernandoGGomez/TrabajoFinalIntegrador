@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public final class DatabaseConnection {
 
     /**
-     * URL de conexiï¿½n JDBC. Configurable via -Ddb.url
+     * URL de conexión JDBC. Configurable via -Ddb.url
      */
     private static final String URL = System.getProperty("db.url", "jdbc:mysql://localhost:3306/gestion_comercio");
 
@@ -25,21 +25,21 @@ public final class DatabaseConnection {
     private static final String USER = System.getProperty("db.user", "root");
 
     /**
-     * Contraseï¿½a del usuario. Configurable via -Ddb.password
+     * Contraseña del usuario. Configurable via -Ddb.password
      */
-    private static final String PASSWORD = System.getProperty("db.password", "nicolas02");
+    private static final String PASSWORD = System.getProperty("db.password", "");
 
     static {
         try {
-            // Carga explï¿½cita del driver (requerido en algunas versiones de Java)
+            // Carga explícita del driver (requerido en algunas versiones de Java)
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Valida configuraciï¿½n tempranamente (fail-fast)
+            // Valida configuración tempranamente (fail-fast)
             validateConfiguration();
         } catch (ClassNotFoundException e) {
-            throw new ExceptionInInitializerError("Error: No se encontrï¿½ el driver JDBC de MySQL: " + e.getMessage());
+            throw new ExceptionInInitializerError("Error: No se encontró el driver JDBC de MySQL: " + e.getMessage());
         } catch (IllegalStateException e) {
-            throw new ExceptionInInitializerError("Error en la configuraciï¿½n de la base de datos: " + e.getMessage());
+            throw new ExceptionInInitializerError("Error en la configuración de la base de datos: " + e.getMessage());
         }
     }
 
@@ -48,7 +48,7 @@ public final class DatabaseConnection {
         throw new UnsupportedOperationException("Esta es una clase utilitaria y no debe ser instanciada");
     }
 
-    // nueva conexiï¿½n 
+    // nueva conexión 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
@@ -58,15 +58,15 @@ public final class DatabaseConnection {
     
         private static void validateConfiguration() {
         if (URL == null || URL.trim().isEmpty()) {
-            throw new IllegalStateException("La URL de la base de datos no estï¿½ configurada");
+            throw new IllegalStateException("La URL de la base de datos no está configurada");
         }
         if (USER == null || USER.trim().isEmpty()) {
-            throw new IllegalStateException("El usuario de la base de datos no estï¿½ configurado");
+            throw new IllegalStateException("El usuario de la base de datos no está configurado");
         }
-        // PASSWORD puede ser vacï¿½o (comï¿½n en MySQL local con usuario root sin contraseï¿½a)
+        // PASSWORD puede ser vacío (común en MySQL local con usuario root sin contraseña)
         // Solo validamos que no sea null
         if (PASSWORD == null) {
-            throw new IllegalStateException("La contraseï¿½a de la base de datos no estï¿½ configurada");
+            throw new IllegalStateException("La contraseña de la base de datos no está configurada");
         }
     }
 
