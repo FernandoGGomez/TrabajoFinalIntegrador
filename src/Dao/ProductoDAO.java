@@ -47,7 +47,7 @@ private static final String SEARCH_BY_NAME_OR_BRAND_SQL =
     "precio, peso, codigo_id " +
     "FROM productos p" +
     "LEFT JOIN marcas m ON p.marca_id = m.marca_id" +
-    "WHERE eliminado = FALSE AND (p.nombre_producto LIKE \"%?%\" OR m.nombre_marca LIKE \"%?%\")";
+    "WHERE eliminado = FALSE AND (p.nombre_producto LIKE %?% OR m.nombre_marca LIKE %?%)";
         
     
 private static final String SELECT_BY_CB_SQL = 
@@ -55,7 +55,7 @@ private static final String SELECT_BY_CB_SQL =
     "precio, peso, codigo_id " +
     "FROM productos p" +
     "LEFT JOIN codigo_barras cb ON p.codigo_id = cb.codigo_id" +
-    "WHERE p.eliminado = FALSE AND cb.valor LIKE \"?\"";
+    "WHERE p.eliminado = FALSE AND cb.valor LIKE ?";
 // voy a usar DAOs tontos
 //    //atributo y relacion con codigoBarraDao 
 //    private final CodigoBarrasDao codigoBarrasDao;

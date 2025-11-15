@@ -1,7 +1,9 @@
 package Main;
 
+import Models.Categoria;
 import Models.CodigoBarras;
 import Models.Producto;
+import Service.CategoriaServiceImp;
 import Service.ProductoServiceImp;
 import java.util.List;
 import java.util.Scanner;
@@ -89,14 +91,15 @@ public class MenuHandler {
      
       
         /*
-      Permite buscar un producto por su codigo de barras 
+      Permite buscar un producto por el valor del codigo de barras 
       */
        public Producto bucsarProductoPorCodigoBarras() {
            System.out.print("Ingrese el codigo de barras del producto: ");
            String cb = scanner.nextLine().trim();
            Producto producto = null;
            try{
-              producto = productoService.buscarPorCodigoBarras(cb);
+              int id_cb = codigoDeBarrasService.getIdPorValor(); 
+              producto = productoService.buscarPorCodigoBarras(id_cb);
               
            }catch(Exception e){
               System.err.println("Error al buscar producto: " + e.getMessage());
@@ -136,7 +139,8 @@ public class MenuHandler {
             String inputCategoria = scanner.nextLine().trim();
             try{
                 
-              productoService.setCategoria(p ,inputCategoria); 
+              int id_categoria = Integer.parseInt(inputCategoria);
+              p.setIdCategoria(id_categoria);
               
             }catch(IllegalArgumentException e){
                     System.out.println(e.getMessage());
@@ -166,7 +170,7 @@ public class MenuHandler {
         
     /*
     Actualiza las observacioes del CodigoBarra    
-    */    
+        
     public void actualizarCodigoBarra() {
         try {
             System.out.print("ID del codigo de barra a actualizar: ");
@@ -189,34 +193,11 @@ public class MenuHandler {
         } catch (Exception e) {
             System.err.println("Error al actualizar el codigo de barras: " + e.getMessage());
         }
-    }
+    }*/
      
-  /*
-    Actualizar categoria de CodigoBarra    
-    */  
-     public void actualizarCodigoBarra() {
-        try {
-            System.out.print("ID del codigo de barra a actualizar: ");
-            int id = Integer.parseInt(scanner.nextLine().trim());
-            CodigoBarras cb = productoService.getCodigoBarras().getById(id);
-
-            if (cb == null) {
-                System.out.println("Codigo de barras no encontrado.");
-                return;
-            }
-
-            System.out.print("Nuevas observaciones(actual: " + cb.getObservaciones()+ ", Enter para mantener): ");
-            String observaciones = scanner.nextLine().trim();
-            if (!observaciones.isEmpty()) {
-                cb.setObservaciones(observaciones);
-            }
-            
-            productoService.getCodigoBarras().actualizar(cb);
-            System.out.println("Codigo de barras actualizado exitosamente.");
-        } catch (Exception e) {
-            System.err.println("Error al actualizar el codigo de barras: " + e.getMessage());
-        }
-    }
+ 
+           
+    
     
     
 }
