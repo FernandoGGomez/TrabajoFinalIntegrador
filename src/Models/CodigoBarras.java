@@ -1,13 +1,68 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Models;
 
-/**
- *
- * @author Admin
- */
-public class CodigoBarras {
+import java.time.LocalDate;
+
+public class CodigoBarras extends Base {
+    private String valor;
+    private LocalDate fechaAsignacion;
+    private String observaciones;
+    private int tipoId;
+
+    public CodigoBarras(String valor, LocalDate fechaAsignacion, String observaciones, int id, boolean eliminado, int tipoId) {
+        super(id, eliminado);
+        this.valor = valor;
+        this.fechaAsignacion = fechaAsignacion;
+        this.observaciones = observaciones;
+        this.tipoId = tipoId;
+    }
+
+    public int getTipoId() {
+        return tipoId;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
+    public void setFechaAsignacion(LocalDate fechaAsignacion) {
+        this.fechaAsignacion = fechaAsignacion;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    public void setTipoId(int tipoId) {
+        this.tipoId = tipoId;
+    }
+    
+    public CodigoBarras(){
+        super();
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public LocalDate getFechaAsignacion() {
+        return fechaAsignacion;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    @Override
+    public String toString() {
+        return "CodigoBarras{" +
+                "id= " + getId() +
+                ", valor= '" + valor + '\'' +
+                ", fechaAsignacion= " + fechaAsignacion +
+                ", observaciones= '" + observaciones + '\'' +
+                ", eliminado= " + isEliminado() +
+                '}';
+    }
+    
+    
     
 }
