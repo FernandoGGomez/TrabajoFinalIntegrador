@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package DAO;
 
 import Config.DatabaseConnection;
@@ -7,7 +11,10 @@ import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
 
-
+/**
+ *
+ * @author notvo
+ */
 public class ProductoDAO implements GenericDAO<Producto> {
 
     //PreparedStatement
@@ -40,7 +47,7 @@ private static final String SEARCH_BY_NAME_SQL =
 //    private final CodigoBarrasDao codigoBarrasDao;
 //
 //    // constructor
-//    public ProductoDao(CodigoBarrasDao codigoBarrasDao) {
+//    public ProductoDAO(CodigoBarrasDao codigoBarrasDao) {
 //        if (codigoBarrasDao == null) {
 //            throw new IllegalArgumentException("CodigoBarraDao no puede ser null");
 //        }
@@ -50,7 +57,6 @@ private static final String SEARCH_BY_NAME_SQL =
     public ProductoDAO() {
     }
 
-    
     // metodos de genericDao para manejar los inserts, update, busquedas y deletes.
     // respecto a los errores se los maneja directamente en el service
     @Override
@@ -112,7 +118,7 @@ private static final String SEARCH_BY_NAME_SQL =
         try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(UPDATE_SQL)) {
             setProductoParameters(stmt, producto);
             stmt.setInt(7, producto.getId());
-
+            System.out.println(stmt);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
                 throw new SQLException("No se pudo actualizar el producto con ID: " + producto.getId());
@@ -126,10 +132,29 @@ private static final String SEARCH_BY_NAME_SQL =
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
-                throw new SQLException("No se encontr� el producto con ID: " + id);
+                throw new SQLException("No se encontro el producto con ID: " + id);
             }
         }
     }
+    
+    public List<Producto> buscarPorNombre(String nombreOMarca) throws SQLException{
+        List<Producto> productos = new ArrayList<>();
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(SEARCH_BY_NAME_SQL)) {
+              stmt.setString(1, nombreOMarca);
+              
+              try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    productos.add(mapResultSetToProducto(rs));
+                }
+            }catch(SQLException e){
+                throw e;
+            }
+        }catch(SQLException e){
+            throw e;
+        }
+        return productos;
+    }
+    
     /**
      * Setea los parametros de un producto para un PreraedStatement.
      * Metodo aiziliar usado por Crear, crearTx y actualizar.

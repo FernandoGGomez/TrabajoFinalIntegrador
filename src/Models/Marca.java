@@ -23,8 +23,4 @@ public class Marca {
         return logo;
     }
     
-    /*public Marca getMarcaPorId(int idMarca){
-        //como traigo la marca de la DB?
-        return marcaEncontrada;
-    }*/
 }

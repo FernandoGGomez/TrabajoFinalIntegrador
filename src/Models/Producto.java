@@ -19,6 +19,16 @@ public class Producto extends Base {
         this.idCodigo = idCodigo;
     }
     
+     public Producto(String nombre, double precio, double peso, int idCategoria, int idMarca, int idCodigo){
+        super();
+        this.nombre = nombre;
+        this.precio = precio;
+        this.peso = peso;
+        this.idCategoria = idCategoria;
+        this.idMarca = idMarca;
+        this.idCodigo = idCodigo;
+    }
+    
     public Producto(){
         super();
     }

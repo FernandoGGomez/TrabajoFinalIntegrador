@@ -11,6 +11,25 @@ public class Categoria {
         this.descripcion = descripcion;
     }
 
+     public Categoria(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Categoria() {
+    }
+
+     
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
     public int getId() {
         return id;
     }
@@ -23,10 +42,5 @@ public class Categoria {
         return descripcion;
     }
     
-   /*    public Categoria getCategoriaPorId(int idCategoria){
-            como traigo la categoria de la DB?
-            Categoria categoriaEncontrada = 
-            return categoriaEncontrada;
-    }*/
     
 }
