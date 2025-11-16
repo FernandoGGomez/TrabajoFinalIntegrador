@@ -118,7 +118,6 @@ private static final String SEARCH_BY_NAME_SQL =
         try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(UPDATE_SQL)) {
             setProductoParameters(stmt, producto);
             stmt.setInt(7, producto.getId());
-            System.out.println(stmt);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {
                 throw new SQLException("No se pudo actualizar el producto con ID: " + producto.getId());
@@ -140,7 +139,7 @@ private static final String SEARCH_BY_NAME_SQL =
     public List<Producto> buscarPorNombre(String nombreOMarca) throws SQLException{
         List<Producto> productos = new ArrayList<>();
         try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(SEARCH_BY_NAME_SQL)) {
-              stmt.setString(1, nombreOMarca);
+              stmt.setString(1, "%" + nombreOMarca + "%");
               
               try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
