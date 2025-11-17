@@ -43,7 +43,7 @@ public enum Categoria {
                 return cat.getNombre();
             }
         }
-        throw new IllegalArgumentException("ID de categoria no válido: " + id);
+        throw new IllegalArgumentException("ID de categoria no valido: " + id);
     }
 
     public static void mostrarOpciones() {
