@@ -7,34 +7,34 @@ public class Producto extends Base {
     private double peso;
     private int idCategoria;
     private int idMarca;
-    private int idCodigo;
+    private CodigoBarras codigoBarras;
 
-    public Producto(String nombre, double precio, double peso, int idCategoria, int idMarca, int id, boolean eliminado, int idCodigo) {
+    public Producto(String nombre, double precio, double peso, int idCategoria, int idMarca, int id, boolean eliminado, CodigoBarras codigobarras) {
         super(id, eliminado);
         this.nombre = nombre;
         this.precio = precio;
         this.peso = peso;
         this.idCategoria = idCategoria;
         this.idMarca = idMarca;
-        this.idCodigo = idCodigo;
+        this.codigoBarras = codigobarras;
     }
     
-     public Producto(String nombre, double precio, double peso, int idCategoria, int idMarca, int idCodigo){
+     public Producto(String nombre, double precio, double peso, int idCategoria, int idMarca, CodigoBarras codigobarras){
         super();
         this.nombre = nombre;
         this.precio = precio;
         this.peso = peso;
         this.idCategoria = idCategoria;
         this.idMarca = idMarca;
-        this.idCodigo = idCodigo;
+        this.codigoBarras = codigobarras;
     }
     
     public Producto(){
         super();
     }
 
-    public int getIdCodigo() {
-        return idCodigo;
+    public CodigoBarras getCodigoBarras() {
+        return codigoBarras;
     }
 
     public String getNombre() {
@@ -77,8 +77,8 @@ public class Producto extends Base {
         this.idMarca = idMarca;
     }
 
-    public void setIdCodigo(int idCodigo) {
-        this.idCodigo = idCodigo;
+    public void setCodigoBarras(CodigoBarras codigobarras) {
+        this.codigoBarras = codigobarras;
     }
 
     /*  
@@ -90,16 +90,28 @@ public class Producto extends Base {
         return getMarcaPorId(idMarca);
     }
      */
+
     @Override
-    public String toString() {
-        return "Producto{"
-                + "id= " + getId()
-                + ", nombre= '" + nombre + '\''
-                + ", precio= $" + precio
-                + ", peso= " + peso + 'g'
-                + //", Categoria= " + getCategoriaPorId +
-                //", Marca= "+ getMarca()+
-                '}';
-    }
+public String toString() {
+    return String.format(
+        "%-12s: %s%n" +
+        "%-12s: %s%n" +
+        "%-12s: $%.2f%n" + 
+        "%-12s: %.2fg%n" +
+        "%-12s: %s%n" +
+        "%-12s: %s%n" +
+        "%-12s\n" + 
+        "%s",
+        "Id Producto", getId(),
+        "Producto", nombre,
+        "Precio", precio,
+        "Peso", peso, 
+        "Categoria", Categoria.getCategoria(idCategoria),
+        "Marca", Marca.getMarca(idMarca),
+        "Codigo", codigoBarras
+    );
+}
+
+
 
 }

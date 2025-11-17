@@ -1,35 +1,25 @@
 package Models;
 
-public class Categoria {
-    private int id;
-    private String nombre;
-    private String descripcion;
+public enum Categoria {
+    CELULARES(1, "Celulares"),
+    COMPUTACION(2, "Computacion"),
+    TELEVISORES(3, "Televisores"),
+    AUDIO(4, "Audio"),
+    LINEA_BLANCA(5, "Linea Blanca"),
+    PEQUEÑOS_ELECTRODOMESTICOS(6, "Pequenos Electrodomesticos"),
+    CLIMATIZACION(7, "Climatizacion"),
+    CUIDADO_PERSONAL(8, "Cuidado Personal"),
+    CONSOLAS(9, "Consolas"),
+    HERRAMIENTAS_JARDINERIA(10, "Herramientas y jardineria");
 
-    public Categoria(int id, String nombre, String descripcion) {
+    private final int id;
+    private final String nombre;
+
+    private Categoria(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
     }
 
-     public Categoria(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Categoria() {
-    }
-
-     
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
     public int getId() {
         return id;
     }
@@ -38,9 +28,28 @@ public class Categoria {
         return nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public static Categoria buscarPorId(int id) {
+        for (Categoria cat : values()) {
+            if (cat.id == id) {
+                return cat;
+            }
+        }
+        throw new IllegalArgumentException("ID de categoria no válido: " + id);
     }
     
-    
+        public static String getCategoria(int id) {
+        for (Categoria cat : values()) {
+            if (cat.id == id) {
+                return cat.getNombre();
+            }
+        }
+        throw new IllegalArgumentException("ID de categoria no válido: " + id);
+    }
+
+    public static void mostrarOpciones() {
+        System.out.println("Categorias disponibles:");
+        for (Categoria cat : values()) {
+            System.out.println(cat.id + ". " + cat.nombre);
+        }
+    }
 }

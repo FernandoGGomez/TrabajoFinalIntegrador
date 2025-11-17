@@ -11,6 +11,7 @@ import java.util.List;
 /**
  *
  * @author notvo
+ * @param <T>
  */
 public interface GenericDAO<T> {
     
