@@ -50,15 +50,20 @@ public class ProductoServiceImp implements GenericService<Producto> {
 
                 insertarTx(producto, conn);
                 conn.commit();
+                conn.setAutoCommit(true);
 
             } catch (SQLException e) {
+                System.err.println("Ocurrio un SQLException. Se hace rollback");
                 conn.rollback();
+                throw e;
+
+            } catch (Exception e) {
+                System.err.println("Ocurrio un error no-SQL. Se hace rollback");
+                conn.rollback(); 
                 throw e;
             }
         }
     }
-    
-
 
     @Override
     public void insertarTx(Producto producto, Connection conn) throws SQLException {
@@ -115,9 +120,9 @@ public class ProductoServiceImp implements GenericService<Producto> {
         }
 
     }
-    
-    public List<Producto> buscarPorNombre(String nombre) throws SQLException{
-         if (nombre == null || nombre.trim().isEmpty()) {
+
+    public List<Producto> buscarPorNombre(String nombre) throws SQLException {
+        if (nombre == null || nombre.trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre de busqueda no puede estar vacio");
         }
         return productoDAO.buscarPorNombre(nombre);
@@ -126,5 +131,5 @@ public class ProductoServiceImp implements GenericService<Producto> {
     public CodigoBarrasServiceImp getCodigoBarrasSeriviceImp() {
         return codigoBarrasSeriviceImp;
     }
-    
+
 }
