@@ -1,4 +1,19 @@
+# Archivos de construcción de NetBeans
 /build/
 /dist/
 /nbproject/private/
-nbproject/project
+/nbproject/project.properties
+/nbproject/project.xml
+
+# Archivo de configuración con credenciales
+Config/DatabaseConnection.java
+
+# Otros archivos comunes a ignorar
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.log
