@@ -62,14 +62,10 @@ public class CodigoBarras extends Base {
 
     @Override
     public String toString() {
-        return "CodigoBarras{" +
-                "id= " + getId() +
-                ", valor= '" + valor + '\'' +
-                ", fechaAsignacion= " + fechaAsignacion +
-                ", observaciones= '" + observaciones + '\'' +
-                ", eliminado= " + isEliminado() +
-                '}';
+        return "CodigoBarras{" + "valor=" + valor + ", fechaAsignacion=" + fechaAsignacion + ", observaciones=" + observaciones + ", tipoId=" + tipoId + '}';
     }
+
+
     
     
     

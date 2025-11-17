@@ -19,4 +19,3 @@ public class MenuDisplay {
     }
 }
     
-// do {} while (opcion != 0);  opcional

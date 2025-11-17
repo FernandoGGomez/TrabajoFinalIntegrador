@@ -45,7 +45,7 @@ public class ProductoServiceImp implements GenericService<Producto> {
                 if (codigoBarras != null) {
                     codigoBarrasSeriviceImp.validate(codigoBarras); // validator
                     codigoBarrasSeriviceImp.insertarTx(codigoBarras, conn); // insert con transaccion en codigobarrasserivceimp
-                    producto.setIdCodigo(codigoBarras.getId());
+                    producto.setCodigoBarras(codigoBarras);
                 }
 
                 insertarTx(producto, conn);
@@ -126,5 +126,5 @@ public class ProductoServiceImp implements GenericService<Producto> {
     public CodigoBarrasServiceImp getCodigoBarrasSeriviceImp() {
         return codigoBarrasSeriviceImp;
     }
-
+    
 }

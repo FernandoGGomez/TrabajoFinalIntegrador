@@ -1,7 +1,10 @@
 package Main;
 
+import Models.Categoria;
 import Models.CodigoBarras;
+import Models.Marca;
 import Models.Producto;
+import Models.TipoCodigoBarras;
 import Service.CodigoBarrasServiceImp;
 import Service.ProductoServiceImp;
 import java.sql.SQLException;
@@ -58,28 +61,23 @@ public class MenuHandler {
             }
 
             // Validar el ID de la categoría
-            System.out.print("Id categoria: ");
+            Categoria.mostrarOpciones();
+            System.out.print("Id Categoria: ");    
             int idCategoria = Integer.parseInt(scanner.nextLine().trim());
-            if (idCategoria <= 0) {
-                throw new IllegalArgumentException("El ID de la categoría debe ser mayor a 0.");
-            }
+            Categoria.buscarPorId(idCategoria);
+            
            
             // Validar el ID de la marca
-            System.out.print("Id marca: ");
+            Marca.mostrarOpciones();
+            System.out.print("Id Marca: ");
             int idMarca = Integer.parseInt(scanner.nextLine().trim());
-            if (idMarca <= 0) {
-              throw new IllegalArgumentException("El ID de la marca debe ser mayor a 0.");
-            }
+            Marca.buscarPorId(idMarca);
            
-            // Validar el ID del código de barras
-            System.out.print("Id codigo de barras: ");
-            int idCodigo = Integer.parseInt(scanner.nextLine().trim());
-            if (idCodigo <= 0) {
-                throw new IllegalArgumentException("El ID del codigo debe ser mayor a 0.");
-            }
 
-            Producto producto = new Producto(nombre, precio, peso, idCategoria, idMarca, idCodigo);
             CodigoBarras codigoBarras = crearCodigoBarras();
+            
+            Producto producto = new Producto(nombre, precio, peso, idCategoria, idMarca, codigoBarras); // aca usamos el getid de cogiobarras porque no lo recibimos a mano, es algo que nos da sql en este caso
+//            Producto producto = new Producto();// aca usamos contructor vacio para no tener que mandar el id_codigo que todavia no tenemos. DEspues lo construimos abajo mediante gets. 
             productoService.crearProductoConCodigo(producto,codigoBarras);
             System.out.println("Producto creado exitosamente con ID: " + producto.getId());
         } catch (Exception e) {
@@ -102,7 +100,7 @@ public class MenuHandler {
             }else{
             
                 for (Producto p : productos) {
-                    System.out.println(p);
+                    System.out.println(p + " " + p.getCodigoBarras());
                 }
 
             }
@@ -184,7 +182,7 @@ public class MenuHandler {
         }
         
         
-        private CodigoBarras crearCodigoBarras(){
+        public CodigoBarras crearCodigoBarras(){
              try{
                 // Solicitar el valor del código de barras
                 System.out.print("Valor del codigo de barras(minimo 8 digitos): ");
@@ -194,14 +192,13 @@ public class MenuHandler {
                     throw new IllegalArgumentException("El valor del codigo de barras no puede estar vacio.");
                 }
 
-                      // Solicitar el tipo de código de barras (número entre 1 y 3)
-                System.out.print("Tipo de codigo de barras (1 - 3): ");
-                int tipoId = Integer.parseInt(scanner.nextLine().trim());
-
-                // Validar que el tipo esté dentro del rango válido
-                if (tipoId < 1 || tipoId > 3) {
-                    throw new IllegalArgumentException("El tipo de codigo de barras debe ser un numero entre 1 y 3.");
-                }
+                 // Solicitar el tipo de código de barra 
+                 TipoCodigoBarras.mostrarOpciones();
+                 System.out.print("Seleccionar tipo: ");
+                 int tipoId = Integer.parseInt(scanner.nextLine().trim());
+                // Validar el rango entre 1 y 3
+                TipoCodigoBarras.buscarPorId(tipoId);
+                
                 
                 // Crear el objeto CodigoBarras
                 CodigoBarras codigoBarras = new CodigoBarras(valor, tipoId);
